@@ -21,12 +21,24 @@ const Layout = (props) => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><NavLink  to={'/'}>হোম</NavLink>  </li>
-                            {
-                                categories.map((item,index)=>{
-                                    return     <li><NavLink key={index.toString()} to={'/byCategory/'+item['id']}>{item['name']}</NavLink></li>
-                                })
-                            }
+                            <li><NavLink  to={'/'}>Home</NavLink>  </li>
+                            <li>
+                                <details>
+                                    <summary>
+                                        Category List
+                                    </summary>
+                                    <ul className="p-2 bg-base-100 rounded-t-none">
+                                        {
+                                            categories.map((item,index)=>{
+                                                return <li><NavLink key={index.toString()} to={'/byCategory/'+item['id']}>{item['name']}</NavLink></li>
+                                            })
+                                        }
+                                    </ul>
+                                </details>
+                            </li>
+                            <li><NavLink to={'/portfolio'}>Portfolio</NavLink></li>
+                            <li><NavLink to={'/about'}>About</NavLink></li>
+                            <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
                         </ul>
                     </div>
                     <a className="btn btn-ghost normal-case text-xl">MR-BLOG</a>
@@ -48,12 +60,12 @@ const Layout = (props) => {
                                 </ul>
                             </details>
                         </li>
+                        <li><NavLink to={'/portfolio'}>Portfolio</NavLink></li>
                         <li><NavLink to={'/about'}>About</NavLink></li>
                         <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
-                        <li><NavLink to={'/port-folio'}>Port Folio</NavLink></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end hidden lg:flex normal-case">
                     <div className="form-control">
                         <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
                     </div>

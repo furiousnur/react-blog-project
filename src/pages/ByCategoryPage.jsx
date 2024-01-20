@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../layout/layout.jsx";
-import {postCategories, postList, postNewest} from "../ApiRequest/ApiRequest.js";
+import {postList} from "../ApiRequest/ApiRequest.js";
 import Loader from "../component/Loader.jsx";
 import BlogList from "../component/BlogList.jsx";
 import {useParams} from "react-router-dom";
