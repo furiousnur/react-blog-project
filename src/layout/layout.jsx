@@ -36,7 +36,7 @@ const Layout = (props) => {
                                     </ul>
                                 </details>
                             </li>
-                            <li><NavLink to={'/portfolio'}>Portfolio</NavLink></li>
+                            <li><NavLink to={'/blogs'}>Blogs</NavLink></li> 
                             <li><NavLink to={'/about'}>About</NavLink></li>
                             <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
                         </ul>
@@ -60,7 +60,7 @@ const Layout = (props) => {
                                 </ul>
                             </details>
                         </li>
-                        <li><NavLink to={'/portfolio'}>Portfolio</NavLink></li>
+                        <li><NavLink to={'/blogs'}>Blogs</NavLink></li> 
                         <li><NavLink to={'/about'}>About</NavLink></li>
                         <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
                     </ul>
