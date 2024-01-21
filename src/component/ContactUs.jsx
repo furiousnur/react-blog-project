@@ -1,6 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from "axios";
 
-const Contact = () => {
+const Contact = () => { 
+    const [input, setInput] = useState({}); 
+    const [successResponse, setSuccessResponse] = useState("");
+    const [errorResponse, setErrorResponse] = useState("");
+    const [errors, setErrors] = useState({});
+    
+    const handleChange = (e) => setInput({
+        ...input,
+        [e.currentTarget.name]: e.currentTarget.value
+    });
+    
+    const handleForm = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData); 
+        if (Object.values(data).some(value => value.trim() !== '')) {
+            try {
+                const response = await axios.post("http://127.0.0.1:8000/api/contact-us", data); 
+                if (response.status === 200) {
+                    setSuccessResponse(response.data.message);
+                    setInput({
+                        first_name: "",
+                        last_name: "",
+                        email: "",
+                        message: ""
+                    }); 
+                } else {
+                    console.error("Error:", response);
+                }
+            } catch (error) {
+                setErrors(error.response.data.errors);
+            }
+        } else {
+            setErrorResponse("Fill up the form correctly");
+        } 
+    } 
     return (
         <div>
             <section className="py-16 bg-gray-100 font-poppins dark:bg-gray-900">
@@ -145,45 +181,56 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="px-8 py-8 bg-white border rounded-md shadow-md dark:border-gray-800 dark:bg-gray-800">
-                        <form action="">
+                        <form action="" onSubmit={handleForm}>
                             <div className="mb-6">
-                                <h2 className="text-xl font-bold text-gray-00 dark:text-gray-400">
-                                    Please send message for futher information!{" "}
+                                <div role="alert" className={`alert ${successResponse ? 'alert-success' : 'hidden'} mb-6`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>{successResponse}</span>
+                                </div>
+                                <div role="alert" className={`alert ${errorResponse ? 'alert-error' : 'hidden'} mb-6`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>{errorResponse}</span>
+                                </div>
+                                <h2 className="text-xl font-bold text-gray-00 dark:text-gray-400 text-center">
+                                    Please send message for further information! 
                                 </h2>
                             </div>
                             <div className="flex flex-wrap mb-4 -mx-2">
                                 <div className="w-full px-2 mb-4 lg:mb-0 lg:w-1/2">
-                                    <input
-                                        className="w-full px-3 py-2 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
-                                        type="text"
-                                        placeholder="First Name.."
-                                        required=""
-                                    />
+                                    <input className="w-full px-3 py-2 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
+                                        type="text" placeholder="First Name..*" required="" name="first_name" value={input.first_name} onChange={handleChange}/>
+                                    <p className={`${errors.first_name && errors.first_name.length > 0 ? 'text-red-500' : 'hidden'}`}>
+                                        {errors.first_name && errors.first_name.length > 0 && errors.first_name[0]}
+                                    </p>
                                 </div>
                                 <div className="w-full px-2 lg:w-1/2">
-                                    <input
-                                        className="w-full px-3 py-2 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
-                                        type="text"
-                                        placeholder="Last Name.."
-                                        required=""
-                                    />
+                                    <input className="w-full px-3 py-2 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
+                                        type="text" placeholder="Last Name..*" required="" name="last_name" value={input.last_name} onChange={handleChange}/>
+                                    <p className={`${errors.last_name && errors.last_name.length > 0 ? 'text-red-500' : 'hidden'}`}>
+                                        {errors.last_name && errors.last_name.length > 0 && errors.last_name[0]}
+                                    </p>
                                 </div>
                             </div>
-                            <input
-                                className="w-full px-3 py-2 mb-4 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
-                                type="email"
-                                placeholder="abc@gmail.com"
-                                required=""
-                            />
-                            <textarea
-                                rows={4}
-                                type="message"
-                                placeholder="Write a message..."
-                                required=""
-                                className="block w-full px-4 mb-4 leading-tight text-gray-700 border rounded bg-gray-50 dark:placeholder-gray-400 py-7 dark:text-gray-400 dark:border-gray-800 dark:bg-gray-700 "
-                                defaultValue={""}
-                            />
-                            <button className="w-full py-4 text-sm font-bold leading-normal text-white transition-all duration-300 bg-blue-600 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600 hover:bg-blue-700">
+                            <div className="w-full mb-4">
+                                <input className="w-full px-3 py-2 leading-loose border rounded-md bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-700"
+                                       type="email" placeholder="abc@gmail.com*" required="" name="email" value={input.email} onChange={handleChange}/>
+                                <p className={`${errors.email && errors.email.length > 0 ? 'text-red-500' : 'hidden'} mb-4`}>
+                                    {errors.email && errors.email.length > 0 && errors.email[0]}
+                                </p>
+                            </div>
+                            <div className="w-full mb-4">
+                                <textarea rows="4" type="text" placeholder="Write a message...*" required="" name="message" value={input.message} onChange={handleChange}
+                                    className="block w-full px-4 leading-tight text-gray-700 border rounded bg-gray-50 dark:placeholder-gray-400 py-7 
+                                    dark:text-gray-400 dark:border-gray-800 dark:bg-gray-700"/>
+                                <p className={`${errors.message && errors.message.length > 0 ? 'text-red-500' : 'hidden'} mb-4`}>
+                                    {errors.message && errors.message.length > 0 && errors.message[0]}
+                                </p>
+                            </div>
+                            <button type="submit" className="w-full py-4 text-sm font-bold leading-normal text-white transition-all duration-300 bg-blue-600 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600 hover:bg-blue-700">
                                 Send Message
                             </button>
                         </form>
