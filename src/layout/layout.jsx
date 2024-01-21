@@ -85,7 +85,9 @@ const Layout = (props) => {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li><a>Logout</a></li> 
+                            <li><NavLink to={'/registration'}>Registration</NavLink></li>
+                            <li><NavLink to={'/login'}>Login</NavLink></li>
                         </ul>
                     </div>
                 </div>

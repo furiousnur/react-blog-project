@@ -230,9 +230,11 @@ const Contact = () => {
                                     {errors.message && errors.message.length > 0 && errors.message[0]}
                                 </p>
                             </div>
-                            <button type="submit" className="w-full py-4 text-sm font-bold leading-normal text-white transition-all duration-300 bg-blue-600 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600 hover:bg-blue-700">
-                                Send Message
-                            </button>
+                            <div className="flex flex-col items-center justify-center">
+                                <button type="submit" className="flex items-center justify-center lg:w-1/5 w-full py-4 text-sm font-bold leading-normal text-white transition-all duration-300 bg-blue-600 rounded-md dark:bg-blue-500 dark:hover:bg-blue-600 hover:bg-blue-700">
+                                    Send Message
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

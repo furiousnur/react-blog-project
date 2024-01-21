@@ -5,6 +5,8 @@ import DetailsPage from "./pages/DetailsPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import ContactPage from "./pages/ContactUsPage";
 import BlogPage from "./pages/BlogPage.jsx";
+import RegistrationPage from "./pages/auth/RegistrationPage.jsx";
+import LoginPage from "./pages/auth/LoginPage.jsx";
 
 const App = () => {
     return (
@@ -17,7 +19,8 @@ const App = () => {
                     <Route path="/details/:id" element={<DetailsPage/>}/>
                     <Route path="/about" element={<AboutPage/>}/>
                     <Route path="/contact-us" element={<ContactPage/>}/>
-                    <Route path="/portfolio" element={<DetailsPage/>}/>
+                    <Route path="/registration" element={<RegistrationPage/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
                 </Routes>
             </BrowserRouter>
         </div>
