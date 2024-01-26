@@ -58,14 +58,20 @@ export async function sendContactMessage(listId, author, comment){
 
 // loginUser function
 export async function loginUser(data) {
-    try {
-        const response = await axios.post(localBaseUrl + "/login", data);
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            throw new Error("Login failed");
-        }
-    } catch (error) {
-        throw error.response.data;
+    const response = await axios.post(localBaseUrl + "/login", data);
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Registration function
+export async function registration(data) {
+    const response = await axios.post(localBaseUrl + "/register", data);
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
     }
 }

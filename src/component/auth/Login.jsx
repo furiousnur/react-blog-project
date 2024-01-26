@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
-import axios from "axios";
+import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {loginUser} from "../../ApiRequest/ApiRequest.js";
 
 const Login = () => {
     const [input, setInput] = useState({});
     const [successResponse, setSuccessResponse] = useState("");
+    const [errorResponse, setErrorResponse] = useState("");
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setSuccessResponse("");
+            setErrorResponse("");
+        }, 5000);
+        return () => {
+            clearInterval(timer);
+        }
+    }, []);
 
     const handleChange = (e) => setInput({
         ...input,
@@ -20,15 +30,22 @@ const Login = () => {
         if (Object.values(data).some(value => value.trim() !== '')) {
             try {
                 const response = await loginUser(data);
-                setSuccessResponse(response);
+                if (response.status === 200) {
+                    setSuccessResponse(response.data.message);
+                    setInput({ 
+                        email: "",
+                        password: "", 
+                    });
+                    setErrors({});
+                    setErrorResponse("");
+                } else {
+                    console.error("Error:", response);
+                }
             } catch (error) {
-                setErrors(error.errors);
+                setErrors(error.response.data.errors);
             }
         } else {
-            setErrors({
-                email: ["The email field is required."],
-                password: ["The password field is required."]
-            })
+            setErrorResponse("Fill up the form correctly");
         }
     }
     return (
@@ -40,6 +57,18 @@ const Login = () => {
                             <div className="w-full h-auto bg-gray-400 dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
                                  style={{ backgroundImage: 'url("https://source.unsplash.com/Mv9hjnEUHR4/600x800")'}} />
                             <div className="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+                                <div role="alert" className={`alert ${successResponse ? 'alert-success' : 'hidden'} mb-6`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>{successResponse}</span>
+                                </div>
+                                <div role="alert" className={`alert ${errorResponse ? 'alert-error' : 'hidden'} mb-6`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>{errorResponse}</span>
+                                </div>
                                 <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
                                     Login Account
                                 </h3>
@@ -51,23 +80,25 @@ const Login = () => {
                                     <div className="mb-4">
                                         <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="email">
                                             Email<span className={`text-red-600 font-bold text-xl`}>*</span>
-                                        </label>
-                                        <input className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none 
-                                            ${errors.email && errors.email.length > 0 ? 'border-red-500' : 'border-white-500'}
-                                            focus:outline-none focus:shadow-outline`} id="email" type="email" placeholder="Email" name="email" onChange={handleChange}/>
-                                        <p className={`${errors.email && errors.email.length > 0 ? 'text-red-500' : 'hidden'} text-lg italic`}>
+                                        </label> 
+                                        <input
+                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none 
+                                            focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"
+                                            value={input.email} name={`email`} onChange={handleChange}
+                                        />
+                                        <p className={`${errors.email && errors.email.length > 0 ? 'text-red-500' : 'hidden'} mb-4`}>
                                             {errors.email && errors.email.length > 0 && errors.email[0]}
                                         </p>
                                     </div>
                                     <div className="mb-4">
                                         <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="password" >
                                             Password<span className={`text-red-600 font-bold text-xl`}>*</span>
-                                        </label>
-                                        <input className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border 
-                                            ${errors.password && errors.password.length > 0 ? 'border-red-500' : 'border-white-500'}
-                                            rounded shadow appearance-none focus:outline-none focus:shadow-outline`} id="password" type="password" 
-                                            name="password" onChange={handleChange} placeholder="******************"/> 
-                                        <p className={`${errors.password && errors.password.length > 0 ? 'text-red-500' : 'hidden'} text-lg italic`}>
+                                        </label> 
+                                        <input className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-red-500 rounded shadow
+                                            appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"
+                                            value={input.password} name={`password`} onChange={handleChange}
+                                        />
+                                        <p className={`${errors.password && errors.password.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
                                             {errors.password && errors.password.length > 0 && errors.password[0]}
                                         </p>
                                     </div> 

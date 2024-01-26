@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import axios from "axios";
+import React, {useEffect, useState} from 'react'; 
 import {NavLink} from "react-router-dom";
+import {registration} from "../../ApiRequest/ApiRequest.js";
 
 const Registration = () => {
     const [input, setInput] = useState({});
@@ -8,6 +8,16 @@ const Registration = () => {
     const [errorResponse, setErrorResponse] = useState("");
     const [errors, setErrors] = useState({});
 
+    useEffect(() => { 
+        const timer = setInterval(() => {
+            setSuccessResponse("");
+            setErrorResponse("");
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        } 
+    }, []);
+    
     const handleChange = (e) => setInput({
         ...input,
         [e.currentTarget.name]: e.currentTarget.value
@@ -18,9 +28,8 @@ const Registration = () => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         if (Object.values(data).some(value => value.trim() !== '')) {
-            try {
-                console.log(data);
-                const response = await axios.post("http://127.0.0.1:8000/api/register", data);
+            try {  
+                const response = await registration(data); 
                 if (response.status === 200) {
                     setSuccessResponse(response.data.message);
                     setInput({
@@ -30,6 +39,8 @@ const Registration = () => {
                         password: "",
                         password_confirmation: "",
                     });
+                    setErrors({});
+                    setErrorResponse("");
                 } else {
                     console.error("Error:", response);
                 }
@@ -64,6 +75,10 @@ const Registration = () => {
                                 <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
                                     Create an Account!
                                 </h3>
+                                <p className="mb-16 text-base text-center text-gray-500">
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus
+                                    magni eius eaque?
+                                </p>
                                 <form className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded" onSubmit={handleForm}>
                                     <div className="mb-4 md:flex md:justify-between">
                                         <div className="mb-4 md:mr-2 md:mb-0">
