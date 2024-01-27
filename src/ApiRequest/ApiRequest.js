@@ -56,6 +56,16 @@ export async function sendContactMessage(listId, author, comment){
     }
 }
 
+// Registration function
+export async function registration(data) {
+    const response = await axios.post(localBaseUrl + "/register", data);
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
 // loginUser function
 export async function loginUser(data) {
     const response = await axios.post(localBaseUrl + "/login", data);
@@ -66,12 +76,20 @@ export async function loginUser(data) {
     }
 }
 
-// Registration function
-export async function registration(data) {
-    const response = await axios.post(localBaseUrl + "/register", data);
-    if (response.status === 200) {
-        return response;
-    }else{
+// logout function
+export async function logout(accessToken) {
+    try {
+        const response = await axios.get(localBaseUrl + "/logout", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        if (response.status === 200) {
+            return response;
+        } else {
+            return [];
+        }
+    } catch (error) {
         return [];
     }
 }

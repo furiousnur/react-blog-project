@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 
 const ProfilePic = () => {
+    const authToken = localStorage.getItem('authToken');
     return (
         <div>
             {/*<div className="form-control">
@@ -15,6 +16,7 @@ const ProfilePic = () => {
                 </div>
                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                     <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                    <li><NavLink to={'/'}>Home Page</NavLink></li>
                     <li>
                         <a className="justify-between">
                             Profile

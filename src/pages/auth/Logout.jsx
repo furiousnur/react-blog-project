@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react'; 
+import React, { useEffect } from 'react';
+import {logout} from "../../ApiRequest/ApiRequest.js"; 
 
-const Logout = () => { 
-    useEffect(() => { 
-        localStorage.removeItem('authToken');
-        window.location.href = '/login'; 
+const Logout = () => {
+    const authToken = localStorage.getItem('authToken');
+    useEffect(async () => {
+        const response = await logout(authToken);
+        if (response.status === 200) {
+            localStorage.removeItem('authToken');
+            window.location.href = '/login'; 
+        }
     }, []);
     
     return (

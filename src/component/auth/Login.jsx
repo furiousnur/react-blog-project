@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { NavLink, useNavigate} from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import {loginUser} from "../../ApiRequest/ApiRequest.js";
 
 const Login = () => {

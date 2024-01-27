@@ -28,20 +28,16 @@ const App = () => {
                         localStorage.removeItem('authToken');
                         setTokenValid(false);
                     }
-                } else { 
+                }/* else { 
                     return <Navigate to="/login" />;
-                }
+                }*/
             } catch (error) { 
                 return <Navigate to="/login" />;
             }
         };
 
         verifyToken();
-    }, [authToken]);
-
-    /*useEffect(() => {
-        setTokenValid(false);
-    }, [authToken]);*/
+    }, [authToken]); 
 
     return (
         <div>

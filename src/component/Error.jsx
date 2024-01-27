@@ -24,12 +24,6 @@ const Error = () => {
                             <Link to="/" className="px-8 py-4 mb-4 mr-4 text-sm font-medium text-gray-100 bg-blue-600 rounded-full hover:bg-blue-800 md:w-auto">
                                 Go to Homepage
                             </Link>
-                            <a
-                                href=""
-                                className="px-8 py-4 mb-4 text-sm font-medium text-gray-100 bg-blue-600 rounded-full md:w-auto hover:bg-blue-800"
-                            >
-                                Try again
-                            </a>
                         </div>
                     </div>
                 </div>
