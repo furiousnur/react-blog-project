@@ -11,6 +11,7 @@ import RegistrationPage from './pages/auth/RegistrationPage.jsx';
 import LoginPage from './pages/auth/LoginPage.jsx';
 import DashboardPage from './pages/admin/DashboardPage.jsx';
 import Logout from './pages/auth/Logout.jsx';
+import Error from "./component/Error.jsx";
 
 const App = () => { 
     const [tokenValid, setTokenValid] = useState(false);
@@ -59,11 +60,18 @@ const App = () => {
                             <Route path="/login" element={<Navigate to="/" />} />
                             <Route path="/registration" element={<Navigate to="/" />} />
                         </>
-                    ) : (
-                        <Route path="/dashboard" element={<Navigate to="/login" />} />
-                    )}
-                    <Route path="/registration" element={<RegistrationPage />} />
-                    <Route path="/login" element={<LoginPage />} />
+                    ) :
+                        <Route path="/*" element={<Error />} />
+                    }
+                    {
+                        !authToken ? (
+                            <>
+                                <Route path="/registration" element={<RegistrationPage />} />
+                                <Route path="/login" element={<LoginPage />} />
+                            </>
+                        ) :
+                        <Route path="/*" element={<Error />} />
+                    }
                 </Routes>
             </BrowserRouter>
         </div>

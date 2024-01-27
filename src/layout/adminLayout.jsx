@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import {NavLink} from "react-router-dom";
+import ProfilePic from "./profilePic.jsx";
 
 const AdminLayout = (props) => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-
+    const authToken = localStorage.getItem('authToken');
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
@@ -37,23 +39,25 @@ const AdminLayout = (props) => {
             </aside>
 
             {/* Main Content */}
-            <div
-                className={`flex-1 flex flex-col overflow-hidden ${
-                    isSidebarOpen ? "scrollbar-thin overflow-y-scroll" : ""
-                }`}
-            >
-                {/* Navbar */}
-                <nav className="bg-gray-800 p-4">
-                    <button
-                        onClick={toggleSidebar}
-                        className="text-white focus:outline-none md:hidden"
-                    >
-                        {isSidebarOpen ? "Close" : "Open"} Menu
-                    </button>
-                    <h1 className="text-2xl font-bold text-white hidden md:block">
-                        Admin Dashboard
-                    </h1>
+            <div className={`flex-1 flex flex-col overflow-hidden ${ isSidebarOpen ? "scrollbar-thin overflow-y-scroll" : "" }`} >
+                {/* Navbar */} 
+                <nav className="bg-gray-800 p-4 flex justify-between items-center">
+                    <div className="flex items-center">
+                        <button
+                            onClick={toggleSidebar}
+                            className="text-white focus:outline-none md:hidden"
+                        >
+                            {isSidebarOpen ? "Close" : "Open"} Menu
+                        </button>
+                        <h1 className="text-2xl font-bold text-white hidden md:block ml-4">
+                            Admin Dashboard
+                        </h1>
+                    </div>
+                    {authToken ? (
+                        <ProfilePic />
+                    ) : null}
                 </nav>
+
                 <div className="p-4 md:p-8">
                     {props.children}
                 </div>

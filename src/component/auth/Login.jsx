@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Navigate, NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import {loginUser} from "../../ApiRequest/ApiRequest.js";
 
 const Login = () => {
     const [input, setInput] = useState({});
     const [successResponse, setSuccessResponse] = useState("");
     const [errorResponse, setErrorResponse] = useState("");
-    const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
-    const [forceRender, setForceRender] = useState(false);
+    const [errors, setErrors] = useState({}); 
     
     useEffect(() => {
         const timer = setInterval(() => {
@@ -34,7 +32,7 @@ const Login = () => {
                     setSuccessResponse(response.data.message);
                     const token = response.data.token;
                     localStorage.setItem('authToken', token);
-                    navigate('/');
+                    window.location.href = '/'; 
                 } else {
                     console.error("Error:", response);
                 }

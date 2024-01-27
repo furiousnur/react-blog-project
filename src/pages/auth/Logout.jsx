@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react'; 
 
-const Logout = () => {
-    const navigate = useNavigate();
+const Logout = () => { 
     useEffect(() => { 
-        localStorage.removeItem('authToken'); 
-        navigate('/login');  
+        localStorage.removeItem('authToken');
+        window.location.href = '/login'; 
     }, []);
     
     return (
