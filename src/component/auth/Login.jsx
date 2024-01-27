@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import {loginUser} from "../../ApiRequest/ApiRequest.js";
 
 const Login = () => {
@@ -7,7 +7,9 @@ const Login = () => {
     const [successResponse, setSuccessResponse] = useState("");
     const [errorResponse, setErrorResponse] = useState("");
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate();
+    const [forceRender, setForceRender] = useState(false);
+    
     useEffect(() => {
         const timer = setInterval(() => {
             setSuccessResponse("");
@@ -15,14 +17,12 @@ const Login = () => {
         }, 5000);
         return () => {
             clearInterval(timer);
-        }
+        } 
     }, []);
-
     const handleChange = (e) => setInput({
         ...input,
         [e.currentTarget.name]: e.currentTarget.value
     });
-
     const handleForm = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -32,12 +32,9 @@ const Login = () => {
                 const response = await loginUser(data);
                 if (response.status === 200) {
                     setSuccessResponse(response.data.message);
-                    setInput({ 
-                        email: "",
-                        password: "", 
-                    });
-                    setErrors({});
-                    setErrorResponse("");
+                    const token = response.data.token;
+                    localStorage.setItem('authToken', token);
+                    navigate('/');
                 } else {
                     console.error("Error:", response);
                 }
@@ -47,7 +44,7 @@ const Login = () => {
         } else {
             setErrorResponse("Fill up the form correctly");
         }
-    }
+    } 
     return (
         <div>
             <div className="h-full bg-gray-400 dark:bg-gray-900 mt-6 py-16">

@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const Layout = (props) => {
     const [categories,SetCategories]=useState([]);
+    const authToken = localStorage.getItem('authToken');
     useEffect(()=>{
         (async () => {
             let res= await postCategories();
@@ -39,6 +40,14 @@ const Layout = (props) => {
                             <li><NavLink to={'/blogs'}>Blogs</NavLink></li> 
                             <li><NavLink to={'/about'}>About</NavLink></li>
                             <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
+                            {
+                                !authToken ? (
+                                    <>
+                                        <li><NavLink to={'/registration'}>Registration</NavLink></li>
+                                        <li><NavLink to={'/login'}>Login</NavLink></li>
+                                    </>
+                                ) : null
+                            }
                         </ul>
                     </div>
                     <NavLink  to={'/'}>
@@ -65,32 +74,43 @@ const Layout = (props) => {
                         <li><NavLink to={'/blogs'}>Blogs</NavLink></li> 
                         <li><NavLink to={'/about'}>About</NavLink></li>
                         <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
+                        {
+                            !authToken ? (
+                                <>
+                                    <li><NavLink to={'/registration'}>Registration</NavLink></li>
+                                    <li><NavLink to={'/login'}>Login</NavLink></li>
+                                </>
+                            ) : null
+                        }
                     </ul>
                 </div>
-                <div className="navbar-end hidden lg:flex normal-case">
-                    <div className="form-control">
-                        <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-                    </div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                {
+                    authToken ? (
+                        <div className="navbar-end hidden lg:flex normal-case">
+                            {/*<div className="form-control">
+                                <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                            </div>*/}
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                    <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><NavLink to={'/logout'}>Logout</NavLink></li>
+                                </ul>
                             </div>
                         </div>
-                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li> 
-                            <li><NavLink to={'/registration'}>Registration</NavLink></li>
-                            <li><NavLink to={'/login'}>Login</NavLink></li>
-                        </ul>
-                    </div>
-                </div>
+                    ) : null
+                }
             </div>
             {props.children}
             <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">

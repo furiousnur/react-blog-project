@@ -75,3 +75,21 @@ export async function registration(data) {
         return [];
     }
 }
+
+// verify the token
+export async function tokenVerify(accessToken) {
+    try {
+        const response = await axios.get(localBaseUrl + "/token-verify", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        if (response.status === 200) {
+            return response;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
