@@ -1,10 +1,14 @@
-import React, {useEffect} from 'react'; 
-import Layout from "../../layout/layout.jsx";
+import React, {useEffect} from 'react';  
 import Dashboard from "../../component/admin/Dashboard.jsx";
+import AdminLayout from "../../layout/adminLayout.jsx"; 
 
-const DashboardPage = () => {    
+const DashboardPage = () => {
     return (
-        <Dashboard/>
+        <AdminLayout>
+            {
+                <Dashboard/>
+            }
+        </AdminLayout>
     );
 };
 
