@@ -57,6 +57,16 @@ export async function sendContactMessage(listId, author, comment){
 }
 
 // Registration function
+export async function addBlog(data) {
+    const response = await axios.post(localBaseUrl + "/blogs", data);
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Registration function
 export async function registration(data) {
     const response = await axios.post(localBaseUrl + "/register", data);
     if (response.status === 200) {

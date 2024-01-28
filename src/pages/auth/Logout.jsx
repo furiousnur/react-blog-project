@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import {logout} from "../../ApiRequest/ApiRequest.js"; 
+import {logout} from "../../ApiRequest/ApiRequest.js";
+import Loader from "../../component/Loader.jsx"; 
 
 const Logout = () => {
     const authToken = localStorage.getItem('authToken');
@@ -13,7 +14,7 @@ const Logout = () => {
     
     return (
         <div> 
-            <p>Logging out...</p>
+            <Loader />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { NavLink} from "react-router-dom";
 import {loginUser} from "../../ApiRequest/ApiRequest.js";
+import Loader from "../Loader.jsx";
 
 const Login = () => {
     const [input, setInput] = useState({});
@@ -27,7 +28,7 @@ const Login = () => {
         const data = Object.fromEntries(formData);
         if (Object.values(data).some(value => value.trim() !== '')) {
             try {
-                const response = await loginUser(data);
+                const response = await loginUser(data); 
                 if (response.status === 200) {
                     setSuccessResponse(response.data.message);
                     const token = response.data.token;
