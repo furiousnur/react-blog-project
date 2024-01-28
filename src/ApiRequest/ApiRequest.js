@@ -1,6 +1,7 @@
 import axios from "axios";
 const baseUrl = "https://basic-blog.teamrabbil.com/api"
 const localBaseUrl = "http://127.0.0.1:8000/api"
+const accessToken = localStorage.getItem('authToken');
 
 export async function postCategories(){
     const response = await axios.get(`${baseUrl}/post-categories`);
@@ -51,16 +52,6 @@ export async function sendContactMessage(listId, author, comment){
     const response = await axios.post(baseUrl + "/create-comment", {"listId": listId, "author": author, "comment": comment});
     if (response.status === 200) {
         return response.data;
-    }else{
-        return [];
-    }
-}
-
-// Registration function
-export async function addBlog(data) {
-    const response = await axios.post(localBaseUrl + "/blogs", data);
-    if (response.status === 200) {
-        return response;
     }else{
         return [];
     }
@@ -118,6 +109,20 @@ export async function tokenVerify(accessToken) {
             return [];
         }
     } catch (error) {
+        return [];
+    }
+}
+
+// Add Blog function
+export async function addBlog(data) {
+    const response = await axios.post(localBaseUrl + "/blogs", data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
         return [];
     }
 }

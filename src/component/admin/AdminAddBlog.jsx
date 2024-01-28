@@ -1,12 +1,13 @@
-import {NavLink} from "react-router-dom";
-import {addBlog, registration} from "../../ApiRequest/ApiRequest.js";
-import {useState} from "react";
+import {useNavigate, NavLink} from "react-router-dom";
+import {addBlog} from "../../ApiRequest/ApiRequest.js";
+import {useState} from "react"; 
 
 const AdminAddBlog = () => {
     const [input, setInput] = useState({});
     const [successResponse, setSuccessResponse] = useState("");
     const [errorResponse, setErrorResponse] = useState("");
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     
     const handleChange = (e) => setInput({
         ...input,
@@ -31,6 +32,7 @@ const AdminAddBlog = () => {
                     });
                     setErrors({});
                     setErrorResponse("");
+                    return navigate('/admin/blogs');
                 } else {
                     console.error("Error:", response);
                 }
