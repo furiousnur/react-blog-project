@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'; 
-import AdminLayout from "../../layout/adminLayout.jsx"; 
-import AdminAddBlog from "../../component/admin/AdminAddBlog";
+import AdminLayout from "../../../layout/adminLayout.jsx"; 
+import AdminAddBlog from "../../../component/admin/blog/AdminAddBlog.jsx";
 
 const AdminAddBlogPage = () => {
     useEffect(() => {

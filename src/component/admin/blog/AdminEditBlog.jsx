@@ -1,13 +1,18 @@
 import {useNavigate, NavLink} from "react-router-dom";
-import {addBlog} from "../../ApiRequest/ApiRequest.js";
-import {useState} from "react"; 
+import {updateBlog} from "../../../ApiRequest/ApiRequest.js";
+import {useState, useEffect} from "react"; 
 
-const AdminAddBlog = () => {
+const AdminEditBlog = (props) => {
     const [input, setInput] = useState({});
     const [successResponse, setSuccessResponse] = useState("");
     const [errorResponse, setErrorResponse] = useState("");
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setInput(props.list)
+    }, [props]);
+    
     
     const handleChange = (e) => setInput({
         ...input,
@@ -20,16 +25,8 @@ const AdminAddBlog = () => {
         const data = Object.fromEntries(formData);
         if (Object.values(data).some(value => value.trim() !== '')) {
             try {
-                const response = await addBlog(data);
+                const response = await updateBlog(data, props.list.id);
                 if (response.status === 200) {
-                    setSuccessResponse(response.data.message);
-                    setInput({
-                        title: "",
-                        category_id: "",
-                        description: "",
-                        status: "",
-                        image: "",
-                    });
                     setErrors({});
                     setErrorResponse("");
                     return navigate('/admin/blogs');
@@ -66,7 +63,7 @@ const AdminAddBlog = () => {
                 <span>{errorResponse}</span>
             </div>
             <div className="mt-3 px-4 py-4 bg-white border shadow-sm dark:border-gray-900 dark:bg-gray-900 lg:py-4 md:px-6"> 
-                <form action="#" className="" onSubmit={handleBlogForm}>
+                <form action="src/component/admin/blog/AdminEditBlog.jsx#" className="" onSubmit={handleBlogForm}>
                     <div className="mb-6">
                         <label htmlFor="" className="block mb-2 text-sm font-medium dark:text-gray-400" >
                             Title
@@ -112,23 +109,24 @@ const AdminAddBlog = () => {
                             {errors.description && errors.description.length > 0 && errors.description[0]}
                         </p>
                     </div>
-                    <div className="mb-8 ">
-                        <label className="mr-2 dark:text-gray-400">
-                            <input type="radio" 
-                                defaultValue="option 1"
-                                className="checked:bg-gray-600 "
-                                defaultChecked="" value={input.status} name={`status`} onChange={handleChange}
-                            />
-                            <span className="ml-2">Active</span>
-                        </label>
-                        <label className="dark:text-gray-400">
-                            <input type="radio" defaultValue="option 2" value={input.status} name={`status`} onChange={handleChange} />
-                            <span className="ml-2">Inactive</span>
-                        </label>
+                    <div className="relative">
+                        <select className="block w-full px-4 py-3 mb-2 text-sm text-gray-500 placeholder-gray-400 bg-gray-100 border rounded appearance-none 
+                            dark:text-gray-400 dark:bg-gray-800 dark:border-gray-800" value={input.status} name={`status`} onChange={handleChange}>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option> 
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16}
+                                 fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fillRule="evenodd"
+                                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                        </div>
                         <p className={`${errors.status && errors.status.length > 0 ? 'text-red-500' : 'hidden'}`}>
                             {errors.status && errors.status.length > 0 && errors.status[0]}
                         </p>
-                    </div>
+                    </div> 
                     <div className="mb-6 ">
                         <label htmlFor="" className="block mb-2 text-sm font-medium dark:text-gray-400" >
                             Image
@@ -153,4 +151,4 @@ const AdminAddBlog = () => {
     );
 };
 
-export default AdminAddBlog;
+export default AdminEditBlog;

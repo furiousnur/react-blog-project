@@ -126,3 +126,44 @@ export async function addBlog(data) {
         return [];
     }
 }
+
+// List of Blog Function
+export async function blogList(data) {
+    const response = await axios.get(localBaseUrl + "/blogs", data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Edit Blog Function
+export async function editBlog(id) { 
+    const response = await axios.get(`${localBaseUrl}/blogs/${id}/edit`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+// Edit Blog Function
+export async function updateBlog(data, id) { 
+    const response = await axios.put(`${localBaseUrl}/blogs/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
