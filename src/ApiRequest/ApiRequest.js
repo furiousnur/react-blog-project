@@ -167,3 +167,17 @@ export async function updateBlog(data, id) {
         return [];
     }
 }
+
+// Edit Blog Function
+export async function deleteBlog(id) { 
+    const response = await axios.delete(`${localBaseUrl}/blogs/${id}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}

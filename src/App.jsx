@@ -15,6 +15,7 @@ import Error from "./component/Error.jsx";
 import AdminBlogPage from "./pages/admin/blog/AdminBlogPage.jsx";
 import AdminAddBlogPage from "./pages/admin/blog/AdminAddBlogPage.jsx";
 import AdminEditBlogPage from "./pages/admin/blog/AdminEditBlogPage";
+import DeletePage from "./pages/admin/DeletePage.jsx";
 
 const App = () => { 
     const [tokenValid, setTokenValid] = useState(false);
@@ -58,6 +59,7 @@ const App = () => {
                             <Route path="/admin/blogs" element={<AdminBlogPage />} />
                             <Route path="/admin/blog/add" element={<AdminAddBlogPage />} />
                             <Route path="/admin/blog/edit/:id" element={<AdminEditBlogPage />} />
+                            <Route path="/admin/blog/delete/:id" element={<DeletePage />} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/login" element={<Navigate to="/" />} />
                             <Route path="/registration" element={<Navigate to="/" />} />

@@ -60,7 +60,11 @@ const AdminBlog = (props) => {
                                         <td className="px-6 py-5 font-medium">{item.title}</td>
                                         <td className="px-6 py-5 font-medium">{item.user.first_name} {item.user.last_name}</td>  
                                         <td className="px-6 py-5 font-medium">{format(new Date(item.created_at), "d MMM yyyy")}</td>
-                                        <td className="px-6 py-5 font-medium">{item.description}</td> 
+                                        <td className="px-6 py-5 font-medium">
+                                            {item.description.length > 100 ?
+                                                `${item.description.substring(0, 100)}...` : item.description
+                                            }
+                                        </td> 
                                         <td className="px-6 py-5 font-medium">
                                             <span className="text-blue-400 dark:text-blue-300">{item.status}</span>
                                         </td>
@@ -68,7 +72,9 @@ const AdminBlog = (props) => {
                                             <button className="btn btn-outline btn-info">
                                                 <NavLink to={`/admin/blog/edit/${item.id}`}>Edit</NavLink>
                                             </button> 
-                                            <button className="ml-2 btn btn-outline btn-error">Delete</button>
+                                            <button className="ml-2 btn btn-outline btn-error">
+                                                <NavLink to={`/admin/blog/delete/${item.id}`}>Delete</NavLink>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))
