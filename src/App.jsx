@@ -29,8 +29,9 @@ const App = () => {
                     if (response.status === 200) {
                         setTokenValid(true);
                     } else { 
-                        localStorage.removeItem('authToken');
-                        setTokenValid(false);
+                        await localStorage.removeItem('authToken');
+                        await setTokenValid(false);
+                        return <Navigate to="/login" />;
                     }
                 }/* else { 
                     return <Navigate to="/login" />;

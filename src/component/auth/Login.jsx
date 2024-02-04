@@ -13,7 +13,7 @@ const Login = () => {
         const timer = setInterval(() => {
             setSuccessResponse("");
             setErrorResponse("");
-        }, 5000);
+        }, 10000);
         return () => {
             clearInterval(timer);
         } 
@@ -30,10 +30,14 @@ const Login = () => {
             try {
                 const response = await loginUser(data); 
                 if (response.status === 200) {
-                    setSuccessResponse(response.data.message);
-                    const token = response.data.token;
-                    localStorage.setItem('authToken', token);
-                    window.location.href = '/'; 
+                    if (response.data.error  === true) {
+                        setErrorResponse(response.data.message); 
+                    }else{
+                        setSuccessResponse(response.data.message);
+                        const token = response.data.token;
+                        localStorage.setItem('authToken', token);
+                        window.location.href = '/';
+                    }
                 } else {
                     console.error("Error:", response);
                 }

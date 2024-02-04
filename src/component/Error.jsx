@@ -2,6 +2,9 @@ import React from 'react';
 import {Link} from "react-router-dom"; 
 
 const Error = () => {
+    const handleClick = () => {
+        return window.location.href = '/';
+    }
     return (
         <div>
             <section
@@ -21,9 +24,9 @@ const Error = () => {
                             Sorry! we are unable to find the page that you are looking for...
                         </p>
                         <div className="flex flex-wrap items-center justify-center">
-                            <Link to="/" className="px-8 py-4 mb-4 mr-4 text-sm font-medium text-gray-100 bg-blue-600 rounded-full hover:bg-blue-800 md:w-auto">
+                            <button onClick={handleClick} className="px-8 py-4 mb-4 mr-4 text-sm font-medium text-gray-100 bg-blue-600 rounded-full hover:bg-blue-800 md:w-auto">
                                 Go to Homepage
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>

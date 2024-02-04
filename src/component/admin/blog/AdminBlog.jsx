@@ -74,7 +74,7 @@ const AdminBlog = (props) => {
                                             </button> 
                                             <button className="ml-2 btn btn-outline btn-error">
                                                 <NavLink to={`/admin/blog/delete/${item.id}`}>Delete</NavLink>
-                                            </button>
+                                            </button> 
                                         </td>
                                     </tr>
                                 ))
