@@ -154,7 +154,7 @@ export async function editBlog(id) {
         return [];
     }
 }
-// Edit Blog Function
+// Update Blog Function
 export async function updateBlog(data, id) { 
     const response = await axios.put(`${localBaseUrl}/blogs/${id}`, data, {
         headers: {
@@ -168,7 +168,7 @@ export async function updateBlog(data, id) {
     }
 }
 
-// Edit Blog Function
+// Delete Blog Function
 export async function deleteBlog(id) { 
     const response = await axios.delete(`${localBaseUrl}/blogs/${id}`, {
         headers: {
@@ -213,6 +213,34 @@ export async function editUser(id) {
 // Update User Function
 export async function updateUser(data, id) {
     const response = await axios.put(`${localBaseUrl}/users/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Approve or Reject User Function
+export async function approveRejectUser(action, id) { 
+    const response = await axios.get(`${localBaseUrl}/user/approve-reject/${action}/${id}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Delete User Function
+export async function deleteUser(id) {
+    const response = await axios.delete(`${localBaseUrl}/users/${id}`, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },

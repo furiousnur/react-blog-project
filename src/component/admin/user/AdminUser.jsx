@@ -21,13 +21,12 @@ const AdminUser = (props) => {
                     <h2 className="mb-4 text-xl font-bold md:mb-0">
                         List of User
                     </h2>
-                    <div className="flex px-6 py-2 mb-4 border border-gray-600 rounded-md md:mb-0 dark:border-gray-400 mt-4">
+                    <div className="flex">
                         <input type="text"
-                               className="w-full pr-4 text-sm text-gray-700 bg-stone-100 dark:text-gray-400 dark:bg-gray-900 placeholder-text-100 "
+                               className="w-full px-1 py-1 mb-2 border border-gray-600 rounded-md md:mb-0 dark:border-gray-400 mt-2 placeholder-text-100 "
                                placeholder="search..."
                         />
-                        <button className="flex items-center text-gray-700 dark:text-gray-400 dark:hover:text-blue-300 hover:text-blue-600">
-                            <span className="mr-2 text-xs ">Go</span>
+                        <button className="flex items-center text-gray-700 dark:text-gray-400 dark:hover:text-blue-300 hover:text-blue-600 ml-1 mt-2"> 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={16}
@@ -68,13 +67,28 @@ const AdminUser = (props) => {
                                         <td className="px-6 py-5 font-medium">
                                             <span className="text-blue-400 dark:text-blue-300">{item.status}</span>
                                         </td>
-                                        <td className="flex items-center px-6 py-5 ">
-                                            <button className="btn btn-outline btn-info">
-                                                <NavLink to={`/admin/user/edit/${item.id}`}>Edit</NavLink>
-                                            </button>
-                                            <button className="ml-2 btn btn-outline btn-error">
-                                                <NavLink to={`/admin/user/delete/${item.id}`} onChange={diffToast}>Delete</NavLink>
-                                            </button>
+                                        <td className="flex items-center px-6 py-5">
+                                            {item.status === 'Pending' ? (
+                                                <>
+                                                    <button className="btn btn-outline btn-success">
+                                                        <NavLink to={`/admin/user/approve-reject/approve/${item.id}`}>Approve</NavLink>
+                                                    </button>
+                                                    <button className="ml-2 btn btn-outline btn-warning">
+                                                        <NavLink to={`/admin/user/approve-reject/reject/${item.id}`}>Reject</NavLink>
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button className="btn btn-outline btn-info">
+                                                        <NavLink to={`/admin/user/edit/${item.id}`}>Edit</NavLink>
+                                                    </button>
+                                                    <button className="ml-2 btn btn-outline btn-error">
+                                                        <NavLink to={`/admin/user/delete/${item.id}`} onChange={diffToast}>
+                                                            Delete
+                                                        </NavLink>
+                                                    </button>
+                                                </>
+                                            )}
                                         </td>
                                     </tr>
                                 ))

@@ -22,13 +22,12 @@ const AdminBlog = (props) => {
                     <h2 className="mb-4 text-xl font-bold md:mb-0">
                         List of Blog
                     </h2>
-                    <div className="flex px-6 py-2 mb-4 border border-gray-600 rounded-md md:mb-0 dark:border-gray-400 mt-4">
+                    <div className="flex">
                         <input type="text"
-                            className="w-full pr-4 text-sm text-gray-700 bg-stone-100 dark:text-gray-400 dark:bg-gray-900 placeholder-text-100 "
-                            placeholder="search..."
+                               className="w-full px-1 py-1 mb-2 border border-gray-600 rounded-md md:mb-0 dark:border-gray-400 mt-2 placeholder-text-100 "
+                               placeholder="search..."
                         />
-                        <button className="flex items-center text-gray-700 dark:text-gray-400 dark:hover:text-blue-300 hover:text-blue-600">
-                            <span className="mr-2 text-xs ">Go</span>
+                        <button className="flex items-center text-gray-700 dark:text-gray-400 dark:hover:text-blue-300 hover:text-blue-600 ml-1 mt-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={16}
