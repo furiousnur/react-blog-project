@@ -35,7 +35,7 @@ const Login = () => {
                     }else{
                         setSuccessResponse(response.data.message);
                         const token = response.data.token;
-                        localStorage.setItem('authToken', token);
+                        localStorage. setItem('authToken', token);
                         window.location.href = '/';
                     }
                 } else {

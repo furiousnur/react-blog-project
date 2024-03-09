@@ -181,3 +181,17 @@ export async function deleteBlog(id) {
         return [];
     }
 }
+
+// List of User Function
+export async function userList(data) {
+    const response = await axios.get(localBaseUrl + "/users", data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}

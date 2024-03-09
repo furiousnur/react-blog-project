@@ -39,7 +39,7 @@ const AdminLayout = (props) => {
                             <NavLink to={'/admin/blogs'}>Blogs</NavLink>
                         </li>
                         <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                            <a href="/users">Users</a>
+                            <NavLink to={'/admin/users'}>Users</NavLink>
                         </li>
                         <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
                             <a href="/orders">Orders</a>

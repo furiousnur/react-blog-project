@@ -1,9 +1,8 @@
-import {NavLink} from "react-router-dom";
-import { format } from "date-fns";
+import {NavLink} from "react-router-dom"; 
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 
-const AdminBlog = (props) => { 
+const AdminUser = (props) => {
     const diffToast = () => {
         toast('Wow so easy');
     }
@@ -11,21 +10,21 @@ const AdminBlog = (props) => {
         <div>
             <div className="flex flex-wrap items-center justify-between px-6 pb-4 border-b dark:border-gray-700">
                 <h2 className="mb-4 text-xl font-bold md:mb-0 text-gray-700">
-                    List of Blog
+                    List of User
                 </h2>
                 <button className="btn btn-outline btn-accent">
-                    <NavLink to={'/admin/blog/add'}>Add Blog</NavLink>
+                    <NavLink to={'/admin/blog/add'}>Add User</NavLink>
                 </button>
             </div>
             <div className="mt-3 rounded shadow bg-stone-100 dark:bg-gray-900">
                 <div className="flex flex-wrap items-center justify-between px-6 pb-4 border-b dark:border-gray-700">
                     <h2 className="mb-4 text-xl font-bold md:mb-0">
-                        List of Blog
+                        List of User
                     </h2>
                     <div className="flex px-6 py-2 mb-4 border border-gray-600 rounded-md md:mb-0 dark:border-gray-400 mt-4">
                         <input type="text"
-                            className="w-full pr-4 text-sm text-gray-700 bg-stone-100 dark:text-gray-400 dark:bg-gray-900 placeholder-text-100 "
-                            placeholder="search..."
+                               className="w-full pr-4 text-sm text-gray-700 bg-stone-100 dark:text-gray-400 dark:bg-gray-900 placeholder-text-100 "
+                               placeholder="search..."
                         />
                         <button className="flex items-center text-gray-700 dark:text-gray-400 dark:hover:text-blue-300 hover:text-blue-600">
                             <span className="mr-2 text-xs ">Go</span>
@@ -48,40 +47,34 @@ const AdminBlog = (props) => {
                 <div className="p-4 overflow-x-auto">
                     <table className="w-full table-auto">
                         <thead>
-                        <tr className="text-sm text-left text-gray-500 dark:text-gray-400"> 
-                            <th className="px-6 pb-3 font-medium ">Title</th>
-                            <th className="px-6 pb-3 font-medium ">Category</th>
-                            <th className="px-6 pb-3 font-medium ">Creator</th>
-                            <th className="px-6 pb-3 font-medium ">Created Date</th>
-                            <th className="px-6 pb-3 font-medium ">Description</th> 
+                        <tr className="text-sm text-left text-gray-500 dark:text-gray-400">
+                            <th className="px-6 pb-3 font-medium ">First Name</th>
+                            <th className="px-6 pb-3 font-medium ">Last Name</th>
+                            <th className="px-6 pb-3 font-medium ">Full Name</th>
+                            <th className="px-6 pb-3 font-medium ">Email</th> 
                             <th className="px-6 pb-3 font-medium">Status</th>
                             <th className="px-6 pb-3 font-medium">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <>
+                        {<>
                             {Array.isArray(props.list) ? (
                                 props.list.map((item, index) => (
-                                    <tr key={index} className="text-sm bg-white dark:text-gray-400 dark:bg-gray-800"> 
-                                        <td className="px-6 py-5 font-medium">{item.title}</td>
-                                        <td className="px-6 py-5 font-medium">{item.category_id == 1 ? 'Manager' : item.category_id == 2 ? 'Chairman' : 'CEO'}</td>
-                                        <td className="px-6 py-5 font-medium">{item.user.first_name} {item.user.last_name}</td>  
-                                        <td className="px-6 py-5 font-medium">{format(new Date(item.created_at), "d MMM yyyy")}</td>
-                                        <td className="px-6 py-5 font-medium">
-                                            {item.description.length > 100 ?
-                                                `${item.description.substring(0, 100)}...` : item.description
-                                            }
-                                        </td> 
+                                    <tr key={index} className="text-sm bg-white dark:text-gray-400 dark:bg-gray-800">
+                                        <td className="px-6 py-5 font-medium">{item.first_name}</td> 
+                                        <td className="px-6 py-5 font-medium">{item.last_name}</td> 
+                                        <td className="px-6 py-5 font-medium">{item.first_name} {item.last_name}</td> 
+                                        <td className="px-6 py-5 font-medium">{item.email}</td>  
                                         <td className="px-6 py-5 font-medium">
                                             <span className="text-blue-400 dark:text-blue-300">{item.status}</span>
                                         </td>
                                         <td className="flex items-center px-6 py-5 ">
                                             <button className="btn btn-outline btn-info">
                                                 <NavLink to={`/admin/blog/edit/${item.id}`}>Edit</NavLink>
-                                            </button> 
+                                            </button>
                                             <button className="ml-2 btn btn-outline btn-error">
                                                 <NavLink to={`/admin/blog/delete/${item.id}`} onChange={diffToast}>Delete</NavLink>
-                                            </button> 
+                                            </button>
                                         </td>
                                     </tr>
                                 ))
@@ -91,7 +84,7 @@ const AdminBlog = (props) => {
                                     <td colSpan="5">Loading...</td>
                                 </tr>
                             )}
-                        </>
+                        </>}
                         </tbody>
                     </table>
                     <div className="flex justify-end pt-4 mt-4 border-t dark:border-gray-700">
@@ -145,4 +138,4 @@ const AdminBlog = (props) => {
     );
 };
 
-export default AdminBlog;
+export default AdminUser;
