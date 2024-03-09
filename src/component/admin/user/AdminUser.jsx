@@ -70,10 +70,10 @@ const AdminUser = (props) => {
                                         </td>
                                         <td className="flex items-center px-6 py-5 ">
                                             <button className="btn btn-outline btn-info">
-                                                <NavLink to={`/admin/blog/edit/${item.id}`}>Edit</NavLink>
+                                                <NavLink to={`/admin/user/edit/${item.id}`}>Edit</NavLink>
                                             </button>
                                             <button className="ml-2 btn btn-outline btn-error">
-                                                <NavLink to={`/admin/blog/delete/${item.id}`} onChange={diffToast}>Delete</NavLink>
+                                                <NavLink to={`/admin/user/delete/${item.id}`} onChange={diffToast}>Delete</NavLink>
                                             </button>
                                         </td>
                                     </tr>

@@ -195,3 +195,31 @@ export async function userList(data) {
         return [];
     }
 }
+
+// Edit User Function
+export async function editUser(id) {
+    const response = await axios.get(`${localBaseUrl}/users/${id}/edit`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}
+
+// Update User Function
+export async function updateUser(data, id) {
+    const response = await axios.put(`${localBaseUrl}/users/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.status === 200) {
+        return response;
+    }else{
+        return [];
+    }
+}

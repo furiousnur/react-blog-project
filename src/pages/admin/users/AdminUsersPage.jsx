@@ -7,7 +7,7 @@ import Loader from "../../../component/Loader.jsx";
 const AdminUsersPage = () => {
     const [list,setList]=useState(null);
     useEffect(() => {
-        document.title = 'Blogs';
+        document.title = 'Users';
         (async ()=>{
             let res= await userList();
             setList(res.data.users)

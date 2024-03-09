@@ -17,6 +17,7 @@ import AdminAddBlogPage from "./pages/admin/blog/AdminAddBlogPage.jsx";
 import AdminEditBlogPage from "./pages/admin/blog/AdminEditBlogPage";
 import DeletePage from "./pages/admin/blog/DeletePage.jsx";
 import AdminUsersPage from "./pages/admin/users/AdminUsersPage.jsx";
+import AdminEditUserPage from "./pages/admin/users/AdminEditUserPage";
 
 const App = () => { 
     const [tokenValid, setTokenValid] = useState(false);
@@ -63,6 +64,7 @@ const App = () => {
                             <Route path="/admin/blog/edit/:id" element={<AdminEditBlogPage />} />
                             <Route path="/admin/blog/delete/:id" element={<DeletePage />} />
                             <Route path="/admin/users" element={<AdminUsersPage />} />
+                            <Route path="/admin/user/edit/:id" element={<AdminEditUserPage />} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/login" element={<Navigate to="/" />} />
                             <Route path="/registration" element={<Navigate to="/" />} />
