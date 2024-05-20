@@ -3,7 +3,7 @@ import { deleteBlog } from "../../../ApiRequest/ApiRequest.js";
 import Loader from "../../../component/Loader.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 
-const DeletePage = () => {
+const DeletePage = (props) => {
     let { id } = useParams();
     const navigate = useNavigate(); 
     useEffect(() => {
@@ -12,8 +12,9 @@ const DeletePage = () => {
             (async () => {
                 try {
                     let res = await deleteBlog(id);
-                    if (res.status === 200) {
-                        navigate('/admin/blogs');
+                    if (res.status === 200) { 
+                        // navigate('/admin/blogs');
+                        navigate(`/admin/${props.type}`);
                     } else {
                         alert('Something went wrong');
                     }

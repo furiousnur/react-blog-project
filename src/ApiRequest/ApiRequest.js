@@ -69,11 +69,10 @@ export async function registration(data) {
 
 // loginUser function
 export async function loginUser(data) {
-    const response = await axios.post(localBaseUrl + "/login", data);
-    if (response.status === 200) {
-        return response;
-    }else{
-        return [];
+    try {
+        return await axios.post(localBaseUrl + "/login", data); 
+    } catch (error) { 
+        return error.response;
     }
 }
 

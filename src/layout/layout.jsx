@@ -29,11 +29,20 @@ const Layout = (props) => {
                                     <summary>
                                         Category List
                                     </summary>
-                                    <ul className="p-2 bg-base-100 rounded-t-none">
+                                    {/*<ul className="p-2 bg-base-100 rounded-t-none">
                                         {
                                             categories.map((item,index)=>{
                                                 return <li><NavLink key={index.toString()} to={'/byCategory/'+item['id']}>{item['name']}</NavLink></li>
                                             })
+                                        }
+                                    </ul*/}>
+                                    <ul className="p-2 bg-base-100 rounded-t-none">
+                                        {
+                                            categories.map((item, index) => (
+                                                <li key={index.toString()}>
+                                                    <NavLink to={`/byCategory/${item.id}`}>{item.name}</NavLink>
+                                                </li>
+                                            ))
                                         }
                                     </ul>
                                 </details>
@@ -65,9 +74,14 @@ const Layout = (props) => {
                                 </summary>
                                 <ul className="p-2 bg-base-100 rounded-t-none">
                                     {
-                                        categories.map((item,index)=>{
+                                        categories.map(item => (
+                                            <li key={item.id}>
+                                                <NavLink to={`/byCategory/${item.id}`}>{item.name}</NavLink>
+                                            </li>
+                                        ))
+                                        /*categories.map((item,index)=>{
                                             return <li><NavLink key={index.toString()} to={'/byCategory/'+item['id']}>{item['name']}</NavLink></li>
-                                        })
+                                        })*/
                                     }
                                 </ul>
                             </details>

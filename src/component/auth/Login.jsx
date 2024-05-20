@@ -28,18 +28,14 @@ const Login = () => {
         const data = Object.fromEntries(formData);
         if (Object.values(data).some(value => value.trim() !== '')) {
             try {
-                const response = await loginUser(data); 
-                if (response.status === 200) {
-                    if (response.data.error  === true) {
-                        setErrorResponse(response.data.message); 
-                    }else{
-                        setSuccessResponse(response.data.message);
-                        const token = response.data.token;
-                        localStorage. setItem('authToken', token);
-                        window.location.href = '/';
-                    }
-                } else {
-                    console.error("Error:", response);
+                const response = await loginUser(data);
+                if (response.data.error  === true) {
+                    setErrorResponse(response.data.message);
+                }else{
+                    setSuccessResponse(response.data.message);
+                    const token = response.data.token;
+                    localStorage. setItem('authToken', token);
+                    window.location.href = '/';
                 }
             } catch (error) {
                 setErrors(error.response.data.errors);
@@ -86,8 +82,8 @@ const Login = () => {
                                             focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"
                                             value={input.email} name={`email`} onChange={handleChange}
                                         />
-                                        <p className={`${errors.email && errors.email.length > 0 ? 'text-red-500' : 'hidden'} mb-4`}>
-                                            {errors.email && errors.email.length > 0 && errors.email[0]}
+                                        <p className={`${errors && errors.email && errors.email.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
+                                            {errors && errors.email && errors.email.length > 0 && errors.email[0]}
                                         </p>
                                     </div>
                                     <div className="mb-4">
@@ -97,9 +93,9 @@ const Login = () => {
                                         <input className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-red-500 rounded shadow
                                             appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"
                                             value={input.password} name={`password`} onChange={handleChange}
-                                        />
-                                        <p className={`${errors.password && errors.password.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
-                                            {errors.password && errors.password.length > 0 && errors.password[0]}
+                                        /> 
+                                        <p className={`${errors && errors.password && errors.password.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
+                                            {errors && errors.password && errors.password.length > 0 && errors.password[0]}
                                         </p>
                                     </div> 
                                     <div className="mb-6 text-center">

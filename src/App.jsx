@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { tokenVerify } from './ApiRequest/ApiRequest.js';
+import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
+import {deleteBlog, tokenVerify} from './ApiRequest/ApiRequest.js';
 import HomePage from './pages/HomePage.jsx';
 import ByCategoryPage from './pages/ByCategoryPage.jsx';
 import DetailsPage from './pages/DetailsPage.jsx';
@@ -63,7 +63,7 @@ const App = () => {
                             <Route path="/admin/blogs" element={<AdminBlogPage />} />
                             <Route path="/admin/blog/add" element={<AdminAddBlogPage />} />
                             <Route path="/admin/blog/edit/:id" element={<AdminEditBlogPage />} />
-                            <Route path="/admin/blog/delete/:id" element={<DeletePage />} />
+                            <Route path="/admin/blog/delete/:id" element={<DeletePage type='blogs' functionName='deleteBlog' />} />
                             <Route path="/admin/users" element={<AdminUsersPage />} />
                             <Route path="/admin/user/edit/:id" element={<AdminEditUserPage />} />
                             <Route path="/admin/user/approve-reject/:action/:id" element={<ApproveRejectUser />} />

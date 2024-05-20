@@ -32,19 +32,19 @@ const AdminLayout = (props) => {
                 </div>
                 <nav>
                     <ul className="py-4">
-                        <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                            <NavLink to={'/dashboard'}>Dashboard</NavLink>
+                        <li className={`px-4 py-2 hover:bg-gray-700 cursor-pointer ${location.pathname === '/dashboard' ? 'bg-gray-700' : ''}`}>
+                            <NavLink to="/dashboard">Dashboard</NavLink>
                         </li>
-                        <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                            <NavLink to={'/admin/blogs'}>Blogs</NavLink>
+                        <li className={`px-4 py-2 hover:bg-gray-700 cursor-pointer ${location.pathname === '/admin/blogs' ? 'bg-gray-700' : ''}`}>
+                            <NavLink to="/admin/blogs">Blogs</NavLink>
                         </li>
-                        <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                            <NavLink to={'/admin/users'}>Users</NavLink>
+                        <li className={`px-4 py-2 hover:bg-gray-700 cursor-pointer ${location.pathname === '/admin/users' ? 'bg-gray-700' : ''}`}>
+                            <NavLink to="/admin/users">Users</NavLink>
                         </li>
-                        <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                        <li className={`px-4 py-2 hover:bg-gray-700 cursor-pointer ${location.pathname === '/orders' ? 'bg-gray-700' : ''}`}>
                             <a href="/orders">Orders</a>
                         </li>
-                        <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                        <li className={`px-4 py-2 hover:bg-gray-700 cursor-pointer ${location.pathname === '/products' ? 'bg-gray-700' : ''}`}>
                             <a href="/products">Products</a>
                         </li>
                     </ul>
