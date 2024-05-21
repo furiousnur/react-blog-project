@@ -108,7 +108,7 @@ const Layout = (props) => {
                 }
             </div>
             {props.children}
-            <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
+            <footer className="footer footer-center p-10 rounded bg-gray-900 text-white">
                 <nav className="grid grid-flow-col gap-4">
                     <a className="link link-hover">About us</a>
                     <a className="link link-hover">Contact</a>

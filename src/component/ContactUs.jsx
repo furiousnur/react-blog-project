@@ -39,31 +39,27 @@ const Contact = () => {
     } 
     return (
         <div>
-            <section className="py-16 bg-gray-100 font-poppins dark:bg-gray-900">
-                <div className="justify-center flex-1 max-w-5xl px-4 py-4 mx-auto lg:py-10 md:px-7">
-                    <div className="max-w-xl mx-auto">
-                        <div className="text-center ">
-                            <div className="relative flex flex-col items-center">
-                                <div className="absolute hidden md:block -top-14 left-0 text-[120px] text-gray-400 font-bold opacity-10">
-                                    Contact
-                                </div>
-                                <h1 className="text-5xl font-bold dark:text-white">
-                                    {" "}
-                                    Our <span className="text-blue-500"> Contact</span>{" "}
-                                </h1>
-                                <div className="flex w-24 mt-1 mb-10 overflow-hidden rounded">
-                                    <div className="flex-1 h-2 bg-blue-200"></div>
-                                    <div className="flex-1 h-2 bg-blue-400"></div>
-                                    <div className="flex-1 h-2 bg-blue-600"></div>
-                                </div>
-                            </div>
-                            <p className="mb-16 text-base text-center text-gray-500">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus
-                                magni eius eaque? Pariatur numquam, odio quod nobis ipsum ex
-                                cupiditate?
-                            </p>
-                        </div>
+            <section className="bg-neutral-900/30 text-white py-24 mt-16" style={{
+                backgroundImage: "linear-gradient(rgb(17 24 39) 0%, rgb(17 24 39) 0%)"}}>
+                <div className="relative flex flex-col items-center"> 
+                    <h1 className="text-5xl font-bold dark:text-white">
+                        {" "}
+                        Our <span className="text-blue-500"> Contact</span>{" "}
+                    </h1>
+                    <div className="flex w-24 mt-1 mb-10 overflow-hidden rounded">
+                        <div className="flex-1 h-2 bg-blue-200"></div>
+                        <div className="flex-1 h-2 bg-blue-400"></div>
+                        <div className="flex-1 h-2 bg-blue-600"></div>
                     </div>
+                </div>
+                <p className="text-center mt-4 text-lg">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus
+                    magni eius eaque? Pariatur numquam, odio quod nobis ipsum ex
+                    cupiditate?
+                </p>
+            </section>
+            <section className="py-16 bg-gray-100 font-poppins dark:bg-gray-900">
+                <div className="justify-center flex-1 max-w-5xl px-4 py-4 mx-auto lg:py-10 md:px-7"> 
                     <div className="flex flex-wrap mb-8 -mx-4">
                         <div className="w-full px-4 mb-4 lg:w-1/3 lg:mb-0">
                             <div className="h-full py-12 text-center transition-all rounded-lg shadow dark:bg-gray-800 bg-gray-50 hover:shadow-lg">

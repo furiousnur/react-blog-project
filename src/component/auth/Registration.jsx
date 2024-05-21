@@ -80,31 +80,41 @@ const Registration = () => {
                                     magni eius eaque?
                                 </p>
                                 <form className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded" onSubmit={handleForm}>
-                                    <div className="mb-4 md:flex md:justify-between">
-                                        <div className="mb-4 md:mr-2 md:mb-0">
+                                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
+                                        <div className="col-span-1 md:col-span-3">
                                             <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="firstName">
                                                 First Name
                                             </label>
-                                            <input className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                                id="firstName" type="text" placeholder="First Name" value={input.first_name} name={`first_name`} onChange={handleChange}/>
+                                            <input
+                                                className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                                id="firstName"
+                                                type="text"
+                                                placeholder="First Name"
+                                                value={input.first_name}
+                                                name="first_name"
+                                                onChange={handleChange}
+                                            />
                                             <p className={`${errors.first_name && errors.first_name.length > 0 ? 'text-red-500' : 'hidden'}`}>
                                                 {errors.first_name && errors.first_name.length > 0 && errors.first_name[0]}
                                             </p>
                                         </div>
-                                        <div className="md:ml-2">
-                                            <label
-                                                className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                                                htmlFor="lastName">
+                                        <div className="col-span-1 md:col-span-3">
+                                            <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="lastName">
                                                 Last Name
                                             </label>
                                             <input
                                                 className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                                id="lastName" type="text" placeholder="Last Name" value={input.last_name} name={`last_name`} onChange={handleChange}
+                                                id="lastName"
+                                                type="text"
+                                                placeholder="Last Name"
+                                                value={input.last_name}
+                                                name="last_name"
+                                                onChange={handleChange}
                                             />
                                             <p className={`${errors.last_name && errors.last_name.length > 0 ? 'text-red-500' : 'hidden'}`}>
                                                 {errors.last_name && errors.last_name.length > 0 && errors.last_name[0]}
                                             </p>
-                                        </div>
+                                        </div> 
                                     </div>
                                     <div className="mb-4">
                                         <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="email">
@@ -121,8 +131,8 @@ const Registration = () => {
                                             {errors.email && errors.email.length > 0 && errors.email[0]}
                                         </p>
                                     </div>
-                                    <div className="mb-4 md:flex md:justify-between">
-                                        <div className="mb-4 md:mr-2 md:mb-0">
+                                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
+                                        <div className="col-span-1 md:col-span-3">
                                             <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="password">
                                                 Password
                                             </label>
@@ -131,17 +141,16 @@ const Registration = () => {
                                                 id="password"
                                                 type="password"
                                                 placeholder="******************"
-                                                value={input.password} name={`password`} onChange={handleChange}
+                                                value={input.password}
+                                                name="password"
+                                                onChange={handleChange}
                                             />
                                             <p className={`${errors.password && errors.password.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
                                                 {errors.password && errors.password.length > 0 && errors.password[0]}
-                                            </p> 
+                                            </p>
                                         </div>
-                                        <div className="md:ml-2">
-                                            <label
-                                                className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                                                htmlFor="c_password"
-                                            >
+                                        <div className="col-span-1 md:col-span-3">
+                                            <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-white" htmlFor="c_password">
                                                 Confirm Password
                                             </label>
                                             <input
@@ -149,7 +158,9 @@ const Registration = () => {
                                                 id="c_password"
                                                 type="password"
                                                 placeholder="******************"
-                                                value={input.password_confirmation} name={`password_confirmation`} onChange={handleChange}
+                                                value={input.password_confirmation}
+                                                name="password_confirmation"
+                                                onChange={handleChange}
                                             />
                                             <p className={`${errors.password_confirmation && errors.password_confirmation.length > 0 ? 'text-red-500' : 'hidden'} mb-4 italic`}>
                                                 {errors.password_confirmation && errors.password_confirmation.length > 0 && errors.password_confirmation[0]}
@@ -157,10 +168,8 @@ const Registration = () => {
                                         </div>
                                     </div>
                                     <div className="mb-6 text-center">
-                                        <button
-                                            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"
-                                            type="submit"
-                                        >
+                                        <button className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 dark:bg-blue-700 
+                                            dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline" type="submit">
                                             Register Account
                                         </button>
                                     </div>
